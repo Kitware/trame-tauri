@@ -10,17 +10,15 @@ class HtmlElement(AbstractElement):
 
 
 # Expose your vue component(s)
-class CustomWidget(HtmlElement):
-    def __init__(self, **kwargs):
+class Events(HtmlElement):
+    def __init__(self, listen=[], once=[], **kwargs):
         super().__init__(
-            "your-custom-widget",
+            "tauri-events",
             **kwargs,
         )
-        self._attr_names += [
-            "attribute_name",
-            ("py_attr_name", "js_attr_name"),
-        ]
-        self._event_names += [
-            "click",
-            "change",
-        ]
+        self._event_names += listen
+        self._event_names += once
+        l_names = ",".join(map(lambda n: f"'{n}'", listen))
+        o_names = ",".join(map(lambda n: f"'{n}'", once))
+        self._attributes["__listen"] = f':listen="[{l_names}]"'
+        self._attributes["__once"] = f':once="[{o_names}]"'

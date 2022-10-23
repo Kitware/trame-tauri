@@ -1,10 +1,6 @@
-export function readText() {
-  return window.__TAURI__.clipboard.readText();
-}
+import { readText, writeText } from '@tauri-apps/api/clipboard';
 
-export function writeText(txt) {
-  return window.__TAURI__.clipboard.writeText(txt);
-}
+export { readText, writeText };
 
 export default {
   readText,

@@ -1,10 +1,6 @@
-export function invoke(cmd, args) {
-  return window.__TAURI__.tauri.invoke(cmd, args);
-}
+import { invoke, transformCallback } from '@tauri-apps/api/tauri';
 
-export function transformCallback(fn, once = false) {
-  return window.__TAURI__.tauri.transformCallback(fn, once);
-}
+export { invoke, transformCallback };
 
 export default {
   invoke,

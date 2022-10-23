@@ -1,14 +1,10 @@
-export function isPermissionGranted() {
-  return window.__TAURI__.globalShortcut.isPermissionGranted();
-}
+import {
+  isPermissionGranted,
+  requestPermission,
+  sendNotification,
+} from '@tauri-apps/api/notification';
 
-export function requestPermission() {
-  return window.__TAURI__.globalShortcut.requestPermission();
-}
-
-export function sendNotification(options) {
-  return window.__TAURI__.globalShortcut.sendNotification(options);
-}
+export { isPermissionGranted, requestPermission, sendNotification };
 
 export default {
   isPermissionGranted,

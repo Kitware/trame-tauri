@@ -1,5 +1,5 @@
 def test_import():
-    from trame_tauri.widgets.tauri import CustomWidget  # noqa: F401
+    from trame_tauri.widgets.tauri import Events  # noqa: F401
 
-    # For components only, the CustomWidget is also importable via trame
-    from trame.widgets.tauri import CustomWidget  # noqa: F401,F811
+    # For components only, the Events is also importable via trame
+    from trame.widgets.tauri import Events  # noqa: F401,F811

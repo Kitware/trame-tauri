@@ -1,17 +1,4 @@
-export function emit(event, payload) {
-  return window.__TAURI__.event.emit(event, payload);
-}
+import { emit, listen, once } from '@tauri-apps/api/event';
 
-export function listen(event, handler) {
-  return window.__TAURI__.event.listen(event, handler);
-}
-
-export function once(event, handler) {
-  return window.__TAURI__.event.once(event, handler);
-}
-
-export default {
-  emit,
-  listen,
-  once,
-};
+export { emit, listen, once };
+export default { emit, listen, once };
