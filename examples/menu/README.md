@@ -13,7 +13,6 @@ python -m PyInstaller \
     --distpath src-tauri \
     --name server \
     --hidden-import pkgutil \
-    --collect-data trame_client \
     server.py
 
 python -m trame.tools.www --output ./src-tauri/www
