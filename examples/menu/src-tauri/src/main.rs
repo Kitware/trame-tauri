@@ -24,7 +24,8 @@ fn main() {
 
       let (mut rx, _) = Command::new_sidecar("trame")
         .expect("failed to create sidecar")
-        .args(["--server", "--port", "0", "--timeout", "10"])
+        // --no-http: only available in trame-server>=2.4.0
+        .args(["--server", "--port", "0", "--timeout", "10", "--no-http"])
         .spawn()
         .expect("Failed to spawn server");
 

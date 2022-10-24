@@ -14,10 +14,6 @@ python -m PyInstaller \
     --name server \
     --hidden-import pkgutil \
     --collect-data trame_client \
-    --collect-data trame_components \
-    --collect-data trame_vuetify \
-    --collect-data trame_vtk \
-    --collect-data trame_tauri \
     server.py
 
 python -m trame.tools.www --output ./src-tauri/www
