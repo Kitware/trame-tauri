@@ -57,7 +57,6 @@ class Dialog(HtmlElement):
         self._message_queue = asyncio.Queue(maxsize=1)
 
     def _fill_queue(self, type, content):
-        print("_fill_queue", type, content, flush=True)
         if type == "open":
             self._open_queue.put_nowait(content)
         if type == "save":
@@ -76,13 +75,8 @@ class Dialog(HtmlElement):
         if type:
             options["type"] = type
 
-        print("tauri::ask", message, options, flush=True)
-
         self.server.js_call(self._ref, "ask", message, options)
-        print("wait for ask", flush=True)
-        res = await self._ask_queue.get()
-        print("got for ask", res, flush=True)
-        return res
+        return await self._ask_queue.get()
 
     async def confirm(self, message, title=None, type=None, **kwargs):
         options = {}
