@@ -1,5 +1,5 @@
 #!/bin/bash
-rootdir=`dirname $0`
-rootdir=`cd $rootdir && cd .. && pwd`
+rootdir=`dirname "$0"`
+cd "$rootdir"
+cd ../Resources/server
 
-$rootdir/Resources/server/server $@
