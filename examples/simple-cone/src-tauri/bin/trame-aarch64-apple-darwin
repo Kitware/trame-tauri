@@ -2,3 +2,5 @@
 rootdir=`dirname "$0"`
 cd "$rootdir"
 cd ../Resources/server
+
+./server $@
