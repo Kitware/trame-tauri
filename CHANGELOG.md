@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.1 (2023-02-23)
+### Fix
+* **version:** Add __version__ ([`da7d77f`](https://github.com/Kitware/trame-tauri/commit/da7d77f5bdd109954cbea86cc4fe482ed957f1c8))
+
+### Documentation
+* **linux:** Add Linux sidecar executable ([`244c920`](https://github.com/Kitware/trame-tauri/commit/244c9206de021892bb6e09d65224426393188fb3))
+* **mac:** Add missing call to server ([`38640b0`](https://github.com/Kitware/trame-tauri/commit/38640b081339cbcbb6e0fad61ac5ea5458fdaacf))
+* **examples:** Fix trame bash script to support spaces in path ([`edbb1c6`](https://github.com/Kitware/trame-tauri/commit/edbb1c6ad6b7d199bdba43cd479a39c3e8f023a9))
+* **rust:** Add rust cheat sheet ([`d9fb9e4`](https://github.com/Kitware/trame-tauri/commit/d9fb9e470bfbd5ad79774aa2350b9defedeb8e91))
+
 ## v0.2.0 (2022-10-31)
 ### Feature
 * **dialog:** Add support for dialog ([`ce5cbc2`](https://github.com/Kitware/trame-tauri/commit/ce5cbc238d4e65a1411a249be67495f6ab8c2edd))
