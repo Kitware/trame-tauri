@@ -9,6 +9,11 @@ class HtmlElement(AbstractElement):
         if self.server:
             self.server.enable_module(module)
 
+__all__ = [
+    "Events",
+    "Dialog",
+]
+
 
 # Expose your vue component(s)
 class Events(HtmlElement):

@@ -1,6 +1,6 @@
-# HTTP + WebSocket
+# Tauri + WebSocket
 
-This example leverage tauri for just its WebView and let trame act as the full HTTP server by serving its content over HTTP and WebSocket.
+This example leverage tauri for serving/bundling HTML/CSS/JS and leverage trame just for its WebSocket connection. Such setup provide a more secured setup by making more complicated for someone to connect to the application using a browser.
 
 ## Tauri project
 
@@ -45,7 +45,7 @@ From the default content, we edited the following set of files:
     - tauri > bundle > identifier  : "trame.cone"
     - tauri > bundle > resources   : ["server"] # pyinstaller generated app
     - tauri > bundle > targets     : ["appimage", "nsis", "msi", "app", "dmg"]
-    - tauri > security > csp       : "default-src 'self'"
+    - tauri > security > csp       : "default-src 'self' 'unsafe-inline' ws: localhost; script-src 'unsafe-eval' 'self';"
     - tauri > windows              : main-not-visible + splashscreen
 
 
@@ -61,7 +61,7 @@ pip install -U pip
 pip install trame trame-vtk trame-vuetify pyinstaller
 ```
 
-Build bundle for tauri inside `./src-tauri/server/*`
+Build bundle for tauri inside `./src-tauri/server/*` while skipping the web content.
 
 ```bash
 python -m PyInstaller \
@@ -69,10 +69,13 @@ python -m PyInstaller \
     --distpath src-tauri \
     --name server \
     --hidden-import pkgutil \
-    --collect-data trame_client \
-    --collect-data trame_vuetify \
-    --collect-data trame_vtk \
     cone.py
+```
+
+Generate webcontent for tauri to bundle
+
+```bash
+python -m trame.tools.www --output ./src-tauri/www
 ```
 
 ## Tauri bundle
