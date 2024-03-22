@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2024-03-22)
+
+### Feature
+
+* **vue3:** Update components for vue2/3 ([`ca90a05`](https://github.com/Kitware/trame-tauri/commit/ca90a05e8fcdd28edd53400e0c1cb34b095f5932))
+
+### Documentation
+
+* **example:** Add example with menu ([`414eb18`](https://github.com/Kitware/trame-tauri/commit/414eb183cd3b9d4a81c0702807df63c6117ed196))
+* **example:** Add tauri/ws only example ([`f0b4a23`](https://github.com/Kitware/trame-tauri/commit/f0b4a23bd80e22204142dfa77142bafafd27b357))
+* **example:** Add simple http example ([`bcd4b47`](https://github.com/Kitware/trame-tauri/commit/bcd4b4790bf5f104ba5c89f46bd5fba3d3a4c839))
+* **example:** Update tauri ([`f3f5015`](https://github.com/Kitware/trame-tauri/commit/f3f5015a3015313fadb174512776bd76b29a73ac))
+* **example:** Update tauri version ([`ed1d369`](https://github.com/Kitware/trame-tauri/commit/ed1d3696d448671981aec21cc2241a52ae73becb))
+
 ## v0.2.1 (2023-02-23)
 ### Fix
 * **version:** Add __version__ ([`da7d77f`](https://github.com/Kitware/trame-tauri/commit/da7d77f5bdd109954cbea86cc4fe482ed957f1c8))
