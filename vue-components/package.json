@@ -1,28 +1,43 @@
 {
-  "name": "vue-trame_tauri",
-  "private": true,
+  "name": "trame-components",
   "version": "0.0.0",
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "@tauri-apps/api": "1.1.0",
-    "vue": "2.6.11"
+  "description": "Vue component for trame",
+  "repository": "Kitware/trame-components",
+  "main": "./dist/trame-components.umd.js",
+  "unpkg": "./dist/trame-components.umd.js",
+  "exports": {
+    ".": {
+      "require": "./dist/trame-components.umd.js"
+    }
   },
   "scripts": {
-    "build": "vue-cli-service build --target lib --name trame_tauri --filename vue-trame_tauri src/use.js",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build --emptyOutDir",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore --ignore-pattern public",
+    "semantic-release": "semantic-release"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "1.5.3"
+  },
+  "peerDependencies": {
+    "vue": "^2.7.0 || >=3.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-vue": "^6.2.2",
-    "prettier": "^1.19.1",
-    "vue-template-compiler": "2.6.11"
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.33.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "prettier": "^2.7.1",
+    "semantic-release": "19.0.2",
+    "vite": "^4.1.0",
+    "vue": "^3.0.0"
   },
+  "author": "Kitware Inc",
+  "license": "MIT",
+  "keywords": [
+    "Kitware",
+    "trame"
+  ],
   "files": [
     "dist/*",
     "src/*",
