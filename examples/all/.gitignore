@@ -1,7 +1,0 @@
-.venv
-build
-*.spec
-.python-version
-src-tauri/target
-src-tauri/server
-src-tauri/icons
