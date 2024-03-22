@@ -1,0 +1,5 @@
+#!/bin/bash
+rootdir=`dirname $0`
+rootdir=`cd $rootdir && cd .. && pwd`
+
+$rootdir/Resources/server/server $@
