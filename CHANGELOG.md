@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.1 (2024-03-22)
+
+### Fix
+
+* **dialog:** Enable dialogs ([`e406011`](https://github.com/Kitware/trame-tauri/commit/e406011ce46e29c1a6dd000dc31455e7908d859e))
+
+### Documentation
+
+* **example:** Dialog + notification ([`dc1bb28`](https://github.com/Kitware/trame-tauri/commit/dc1bb289c337561900efb3ea7ea3f39f9f1f96cd))
+
 ## v0.3.0 (2024-03-22)
 
 ### Feature
