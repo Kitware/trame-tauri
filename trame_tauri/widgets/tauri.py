@@ -9,6 +9,7 @@ class HtmlElement(AbstractElement):
         if self.server:
             self.server.enable_module(module)
 
+
 __all__ = [
     "Events",
     "Dialog",
@@ -40,21 +41,21 @@ class Dialog(HtmlElement):
         trigger_name = self.server.trigger_name(self._fill_queue)
         self._ref = ref
         self._attributes["__ref"] = f'ref="{self._ref}"'
-        self._attributes[
-            "__open"
-        ] = f'''@open="trigger('{trigger_name}', ['open', $event])"'''
-        self._attributes[
-            "__save"
-        ] = f'''@save="trigger('{trigger_name}', ['save', $event])"'''
-        self._attributes[
-            "__ask"
-        ] = f'''@ask="trigger('{trigger_name}', ['ask', $event])"'''
-        self._attributes[
-            "__confirm"
-        ] = f'''@confirm="trigger('{trigger_name}', ['confirm', $event])"'''
-        self._attributes[
-            "__message"
-        ] = f'''@message="trigger('{trigger_name}', ['message', $event])"'''
+        self._attributes["__open"] = (
+            f'''@open="trigger('{trigger_name}', ['open', $event])"'''
+        )
+        self._attributes["__save"] = (
+            f'''@save="trigger('{trigger_name}', ['save', $event])"'''
+        )
+        self._attributes["__ask"] = (
+            f'''@ask="trigger('{trigger_name}', ['ask', $event])"'''
+        )
+        self._attributes["__confirm"] = (
+            f'''@confirm="trigger('{trigger_name}', ['confirm', $event])"'''
+        )
+        self._attributes["__message"] = (
+            f'''@message="trigger('{trigger_name}', ['message', $event])"'''
+        )
         self._open_queue = asyncio.Queue(maxsize=1)
         self._save_queue = asyncio.Queue(maxsize=1)
         self._ask_queue = asyncio.Queue(maxsize=1)
