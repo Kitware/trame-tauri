@@ -15,6 +15,9 @@
       "dialog": {
         "all": true
       },
+      "notification": {
+        "all": true
+      },
       "shell": {
         "sidecar": true,
         "scope": [

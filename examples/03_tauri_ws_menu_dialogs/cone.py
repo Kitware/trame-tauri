@@ -30,7 +30,7 @@ class Cone:
             response = await self.ctrl.ask(
                 "What is your name?",
                 title="Just a question",
-                type="warn",
+                type="warning",
             )
             self.state.logs += f"=> {response}\n"
 
@@ -137,6 +137,10 @@ class Cone:
                 )
                 with vuetify.VBtn(icon=True, click=self.ctrl.reset_camera):
                     vuetify.VIcon("mdi-crop-free")
+                vuetify.VBtn(
+                    "Notification",
+                    click="utils.tauri.notification.sendNotification('Hello from Tauri')",
+                )
 
             return layout
 
