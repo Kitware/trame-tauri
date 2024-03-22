@@ -1,6 +1,5 @@
 {
   "build": {
-    "withGlobalTauri": true,
     "beforeBuildCommand": "",
     "beforeDevCommand": "",
     "devPath": "./www",
@@ -12,29 +11,28 @@
   },
   "tauri": {
     "allowlist": {
+      "all": false,
+      "dialog": {
+        "all": true
+      },
       "shell": {
         "sidecar": true,
         "scope": [
           {
-            "name": "bin/trame",
+            "name": "sidecar/trame",
             "sidecar": true
           }
         ]
-      },
-      "http": {
-        "scope": ["http://localhost/*"]
       }
     },
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
-      "copyright": "Kitware Inc.",
+      "copyright": "",
       "deb": {
         "depends": []
       },
-      "externalBin": [
-        "bin/trame"
-      ],
+      "externalBin": ["sidecar/trame"],
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -53,7 +51,7 @@
       },
       "resources": ["server"],
       "shortDescription": "",
-      "targets": "all",
+      "targets": ["appimage", "nsis", "msi", "app", "dmg"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
@@ -61,8 +59,7 @@
       }
     },
     "security": {
-      "csp": "default-src 'unsafe-eval' 'unsafe-inline' ws: 'self'",
-      "dangerousDisableAssetCspModification": true
+      "csp": "default-src 'self' 'unsafe-inline' ws: localhost; script-src 'unsafe-eval' 'self';"
     },
     "updater": {
       "active": false
@@ -71,17 +68,20 @@
       {
         "fullscreen": false,
         "height": 600,
-        "width": 800,
         "resizable": true,
-        "title": "Cone - vtk.js",
+        "title": "Cone",
+        "width": 800,
         "visible": false
       },
       {
         "label": "splashscreen",
-        "width": 720,
-        "height": 340,
+        "width": 400,
+        "height": 200,
+        "center": true,
         "decorations": false,
         "resizable": false,
+        "visible": true,
+        "alwaysOnTop": true,
         "url": "splashscreen.html"
       }
     ]

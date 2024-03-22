@@ -4,7 +4,7 @@ import {
   registerAll,
   unregister,
   unregisterAll,
-} from '@tauri-apps/api/globalShortcut';
+} from "@tauri-apps/api/globalShortcut";
 
 export { isRegistered, register, registerAll, unregister, unregisterAll };
 

@@ -1,5 +1,5 @@
-import components from './components';
-import utils from './utils';
+import components from "./components";
+import utils from "./utils";
 
 export function install(Vue) {
   Object.keys(components).forEach((name) => {

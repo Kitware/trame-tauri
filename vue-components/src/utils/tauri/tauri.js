@@ -1,4 +1,4 @@
-import { invoke, transformCallback } from '@tauri-apps/api/tauri';
+import { invoke, transformCallback } from "@tauri-apps/api/tauri";
 
 export { invoke, transformCallback };
 

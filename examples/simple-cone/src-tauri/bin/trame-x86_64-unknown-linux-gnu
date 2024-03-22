@@ -1,6 +1,0 @@
-#!/bin/bash
-rootdir=`dirname "$0"`
-cd "$rootdir"
-cd ../lib/cone/server/
-
-./server $@

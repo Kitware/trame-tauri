@@ -40,7 +40,7 @@ class Dialog(HtmlElement):
         )
         trigger_name = self.server.trigger_name(self._fill_queue)
         self._ref = ref
-        self._attributes["__ref"] = f'ref="{self._ref}"'
+        self._attributes["ref"] = f'ref="{self._ref}"'
         self._attributes["__open"] = (
             f'''@open="trigger('{trigger_name}', ['open', $event])"'''
         )

@@ -1,7 +1,7 @@
-import { listen, once } from '@tauri-apps/api/event';
+import { listen, once } from "@tauri-apps/api/event";
 
 export default {
-  name: 'TauriEvent',
+  name: "TauriEvent",
   props: {
     listen: {
       type: Array,
@@ -16,8 +16,8 @@ export default {
     this.unsubscribes = [];
     for (let i = 0; i < this.listen.length; i++) {
       const name = this.listen[i];
-      const eventName = `tauri://${name.replaceAll('_', '-')}`;
-      const pyName = name.replaceAll('-', '_');
+      const eventName = `tauri://${name.replaceAll("_", "-")}`;
+      const pyName = name.replaceAll("-", "_");
       this.unsubscribes.push(
         await listen(eventName, (e) => {
           this.$emit(pyName, e.payload);
@@ -26,8 +26,8 @@ export default {
     }
     for (let i = 0; i < this.once.length; i++) {
       const name = this.once[i];
-      const eventName = `tauri://${name.replaceAll('_', '-')}`;
-      const pyName = name.replaceAll('-', '_');
+      const eventName = `tauri://${name.replaceAll("_", "-")}`;
+      const pyName = name.replaceAll("-", "_");
       this.unsubscribes.push(
         await once(eventName, (e) => {
           this.$emit(pyName, e.payload);
