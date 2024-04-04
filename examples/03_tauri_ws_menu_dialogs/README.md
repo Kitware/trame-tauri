@@ -90,7 +90,16 @@ cargo tauri icon
 
 # Generate application
 cargo tauri build
+```
 
-# Run generated application
+## Running application
+
+### Linux and macOS
+```bash
 open ./src-tauri/target/release/bundle/macos/Cone.app
+```
+
+### Windows
+```batch
+.\src-tauri\target\release\Cone.exe
 ```
