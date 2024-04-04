@@ -1,8 +1,3 @@
-import { invoke, transformCallback } from "@tauri-apps/api/tauri";
+import * as all from "@tauri-apps/api/tauri";
 
-export { invoke, transformCallback };
-
-export default {
-  invoke,
-  transformCallback,
-};
+export default { ...all };
