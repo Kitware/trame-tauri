@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.0 (2024-04-04)
+
+### Feature
+
+* **utils:** Update utils to support window handling ([`032a9bc`](https://github.com/Kitware/trame-tauri/commit/032a9bccb8be95ba015d50cb1bac2b1e0b0ee8de))
+
 ## v0.3.1 (2024-03-22)
 
 ### Fix
