@@ -36,13 +36,13 @@ class TestApp:
                                 await hello_window.setPosition(new LogicalPosition((payload.x + size.width) / scaleFactor, payload.y / scaleFactor));
                             });
 
-                                                        const hello_world = new trame.utils.tauri.window.WebviewWindow('hello_world', {
-                              url: 'http://localhost:4444/index.html?ui=hello_world',
-                              height: size.height / scaleFactor,
-                              width: 300,
-                              title: 'Hello',
-                              x: (position.x + size.width) / scaleFactor,
-                              y: position.y / scaleFactor,
+                            const hello_world = new trame.utils.tauri.window.WebviewWindow('hello_world', {
+                                url: 'http://localhost:4444/index.html?ui=hello_world',
+                                height: size.height / scaleFactor,
+                                width: 300,
+                                title: 'Hello',
+                                x: (position.x + size.width) / scaleFactor,
+                                y: position.y / scaleFactor,
                             });
                             hello_world.onCloseRequested(() => { window_hello_world = false; });
                             window_hello_world = true;

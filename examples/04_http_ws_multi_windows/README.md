@@ -32,10 +32,20 @@ cargo tauri build
 
 ## Running application
 
+### Linux and macOS
 ```bash
-# start server
+# Start server
 python ./server.py &
 
 # Run desktop application
 open ./src-tauri/target/release/bundle/macos/MultiWindows.app
+```
+
+### Windows
+```batch
+# Start server
+python .\server.py
+
+# Run desktop application in a new terminal or by navigating and opening the file
+.\src-tauri\target\release\MultiWindows.exe
 ```
