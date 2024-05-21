@@ -13,10 +13,10 @@ class HtmlElement(AbstractElement):
 __all__ = [
     "Events",
     "Dialog",
+    "Window",
 ]
 
 
-# Expose your vue component(s)
 class Events(HtmlElement):
     def __init__(self, listen=[], once=[], **kwargs):
         super().__init__(
@@ -31,7 +31,6 @@ class Events(HtmlElement):
         self._attributes["__once"] = f':once="[{o_names}]"'
 
 
-# Expose your vue component(s)
 class Dialog(HtmlElement):
     def __init__(self, ref="tauri_dialog", **kwargs):
         super().__init__(
@@ -140,3 +139,137 @@ class Dialog(HtmlElement):
 
         self.server.js_call(self._ref, "save", options)
         return await self._save_queue.get()
+
+
+class Window(HtmlElement):
+    _next_id = 0
+
+    def __init__(self, ref=None, **kwargs):
+        super().__init__(
+            "tauri-window",
+            **kwargs,
+        )
+
+        if ref is None:
+            Window._next_id += 1
+            ref = f"trame__tauri_window_{Window._next_id}"
+        self.__ref = ref
+        self._attributes["ref"] = f'ref="{ref}"'
+
+        self._attr_names += [
+            "main",
+            "title",
+            "url",
+            "visible",
+            "width",
+            "height",
+            "x",
+            "y",
+            "options",
+            ("prevent_close", "preventClose"),
+        ]
+        self._event_names += [
+            "created",
+            "closed",
+            ("file_drop", "fileDrop"),
+            ("focus_changed", "focusChanged"),
+            ("menu_clicked", "menuClicked"),
+            "moved",
+            "resized",
+            ("scale_changed", "scaleChanged"),
+            ("theme_changed", "themeChanged"),
+        ]
+
+    @property
+    def ref_name(self):
+        return self.__ref
+
+    def center(self):
+        """Center the window."""
+        self.server.js_call(
+            self.__ref,
+            "center",
+        )
+
+    def close(self):
+        """Close the window."""
+        self.server.js_call(
+            self.__ref,
+            "close",
+        )
+
+    def show(self):
+        """Show the window. Same effect as updating the 'visible' property."""
+        self.server.js_call(
+            self.__ref,
+            "show",
+        )
+
+    def hide(self):
+        """Hide the window. Same effect as updating the 'visible' property."""
+        self.server.js_call(
+            self.__ref,
+            "hide",
+        )
+
+    def maximize(self):
+        """Maximize the window"""
+        self.server.js_call(
+            self.__ref,
+            "maximize",
+        )
+
+    def unmaximize(self):
+        """Unmaximize the window"""
+        self.server.js_call(
+            self.__ref,
+            "unmaximize",
+        )
+
+    def minimize(self):
+        """Minimize the window"""
+        self.server.js_call(
+            self.__ref,
+            "minimize",
+        )
+
+    def unminimize(self):
+        """Unminimize the window"""
+        self.server.js_call(
+            self.__ref,
+            "unminimize",
+        )
+
+    def grab_focus(self):
+        """Bring focus to the window"""
+        self.server.js_call(
+            self.__ref,
+            "grabFocus",
+        )
+
+    def set_fullscreen(self, on=True):
+        """Activate or deactivate full screen mode"""
+        self.server.js_call(self.__ref, "setFullscreen", on)
+
+    def request_user_attention(self, level=None):
+        """Request user attention. Level can be None/1/2.
+        https://tauri.app/v1/api/js/window#userattentiontype"""
+        if level is None:
+            self.server.js_call(
+                self.__ref,
+                "requestUserAttention",
+            )
+        else:
+            self.server.js_call(self.__ref, "requestUserAttention", level)
+
+    def set_position(self, x, y):
+        """Update window position (logical)"""
+        self.server.js_call(self.__ref, "setPosition", x, y)
+
+    def set_size(self, w, h):
+        """Update window size (logical)"""
+        self.server.js_call(self.__ref, "setSize", w, h)
+
+    def set_title(self, title):
+        """Update window title"""
+        self.server.js_call(self.__ref, "setTitle", title)

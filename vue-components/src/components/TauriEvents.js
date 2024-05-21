@@ -1,7 +1,6 @@
 import { listen, once } from "@tauri-apps/api/event";
 
 export default {
-  name: "TauriEvent",
   props: {
     listen: {
       type: Array,
