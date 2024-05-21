@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.0 (2024-05-21)
+
+### Feature
+
+* **window:** Add window widget to help ([`05a0ef7`](https://github.com/Kitware/trame-tauri/commit/05a0ef73783ac0fd770a406ed97be1218d38ff75))
+
+### Documentation
+
+* **example:** Add client only example ([`c27d437`](https://github.com/Kitware/trame-tauri/commit/c27d437d4d1f1840ecf4373ce5fe726f1e7dd707))
+* **examples:** Add windows run command ([`903f862`](https://github.com/Kitware/trame-tauri/commit/903f8624e76bd7528b42cce39c3ab26824bee2a1))
+
 ## v0.4.0 (2024-04-04)
 
 ### Feature
