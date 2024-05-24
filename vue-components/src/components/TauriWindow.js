@@ -88,12 +88,15 @@ export default {
 
     // Vue life cycles
 
-    onBeforeUnmount(() => {
-      while (subscriptions.length) {
-        subscriptions.pop()();
+    onBeforeUnmount(async () => {
+      const fns = await Promise.all(subscriptions);
+      subscriptions.length = 0;
+      while (fns.length) {
+        fns.pop()();
       }
       hide();
       close();
+      subscriptions;
     });
 
     // Event handling
