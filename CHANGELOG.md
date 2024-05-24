@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.1 (2024-05-24)
+
+### Fix
+
+* **window:** Properly handle cleanup ([`65acd60`](https://github.com/Kitware/trame-tauri/commit/65acd60146a9491e89dbccbad3e1b79c476216cd))
+
+### Documentation
+
+* **example:** Show window delete ([`a656187`](https://github.com/Kitware/trame-tauri/commit/a6561877b00143eafa52fb8e5f8427c601b83c45))
+* **example 5:** Add windows docs + git ignore Cargo.lock ([`087fcba`](https://github.com/Kitware/trame-tauri/commit/087fcba8abf2abbc564ca06a0dc0fe195a5871be))
+* Update multi-window example ([`5d9a90a`](https://github.com/Kitware/trame-tauri/commit/5d9a90a35909ae6fdca2c9ba8c37452228b7ea20))
+
 ## v0.5.0 (2024-05-21)
 
 ### Feature
