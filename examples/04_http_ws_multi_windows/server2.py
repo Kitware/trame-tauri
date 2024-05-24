@@ -22,17 +22,17 @@ class TestApp:
 
     def build_ui_main(self):
         with SinglePageLayout(self.server, full_height=True) as layout:
-
-            tauri.Window(
-                v_for="url, i in window_list",
-                key="i",
-                url=("url",),
-                visible=True,
-                title=("`New Window ${i}`",),
-                width=300,
-                height=300,
-                options=("{}",),
-            )
+            with html.Div(v_if=("enable_windows", True)):
+                tauri.Window(
+                    v_for="url, i in window_list",
+                    key="i",
+                    url=("url",),
+                    visible=True,
+                    title=("`New Window ${i}`",),
+                    width=300,
+                    height=300,
+                    options=("{}",),
+                )
 
             with layout.toolbar.clear():
                 v3.VToolbarTitle("Multi Window example")
@@ -49,6 +49,10 @@ class TestApp:
                     "Close Hello World",
                     disabled=("!window_hello_world",),
                     click="window_hello_world = false",
+                )
+                v3.VBtn(
+                    "Toggle windows",
+                    click="enable_windows = !enable_windows",
                 )
             with layout.content:
                 with v3.VContainer():
