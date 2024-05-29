@@ -103,15 +103,7 @@ class TestApp:
                 v3.VDivider(style="margin: 8px;")
                 with html.Div(v_if=("window_hello_world", False)):
                     with tauri.Window(
-                        url=(
-                            """
-                            (() => {
-                                const currentUrl = window.location.href;
-                                const separator = currentUrl.includes('?') ? '&' : '?';
-                                return `${currentUrl}${separator}ui=${'hello_world'}`;
-                            })()
-                            """,
-                        ),
+                        url="http://localhost:4444/index.html?ui=hello_world",
                         visible=("window_hello_world", False),
                         title=("child_title", "Hello"),
                         x=("pos_x", 100),
