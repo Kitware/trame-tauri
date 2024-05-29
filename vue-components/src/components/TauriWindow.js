@@ -142,8 +142,8 @@ export default {
       })
     );
     subscriptions.push(
-      webView.onFileDropEvent((event) => {
-        emit("fileDrop", event);
+      webView.onFileDropEvent(({ payload }) => {
+        emit("fileDrop", payload);
       })
     );
     subscriptions.push(
