@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v0.6.0 (2024-05-29)
+
+### Feature
+
+* **window:** Extract payload from file drop event data ([`fdd5ab6`](https://github.com/Kitware/trame-tauri/commit/fdd5ab66655cafdc3888e403e4deafc8cb54f865))
+
+### Documentation
+
+* Revert accidental change ([`ce0d9ee`](https://github.com/Kitware/trame-tauri/commit/ce0d9ee2a73123193eb79f29d915fcfcd1f5d576))
+* **example 4:** Expand example with more examples + minor fixes ([`93b5eb2`](https://github.com/Kitware/trame-tauri/commit/93b5eb236283094f33ab10a77fd670f7941f3d8c))
+
 ## v0.5.1 (2024-05-24)
 
 ### Fix
