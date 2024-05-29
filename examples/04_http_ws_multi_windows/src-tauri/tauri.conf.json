@@ -66,10 +66,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 700,
         "resizable": true,
         "title": "Main window",
-        "width": 800,
+        "width": 1200,
         "visible": true,
         "url": "http://localhost:4444/index.html"
       }
