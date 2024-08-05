@@ -1,4 +1,5 @@
 import { listen, once } from "@tauri-apps/api/event";
+import { onBeforeUnmount, onMounted } from "vue";
 
 export default {
   props: {
@@ -11,32 +12,36 @@ export default {
       default: () => [],
     },
   },
-  async mounted() {
-    this.unsubscribes = [];
-    for (let i = 0; i < this.listen.length; i++) {
-      const name = this.listen[i];
-      const eventName = `tauri://${name.replaceAll("_", "-")}`;
-      const pyName = name.replaceAll("-", "_");
-      this.unsubscribes.push(
-        await listen(eventName, (e) => {
-          this.$emit(pyName, e.payload);
-        })
-      );
-    }
-    for (let i = 0; i < this.once.length; i++) {
-      const name = this.once[i];
-      const eventName = `tauri://${name.replaceAll("_", "-")}`;
-      const pyName = name.replaceAll("-", "_");
-      this.unsubscribes.push(
-        await once(eventName, (e) => {
-          this.$emit(pyName, e.payload);
-        })
-      );
-    }
-  },
-  beforeUnmount() {
-    while (this.unsubscribes.length) {
-      this.unsubscribes.pop()();
-    }
+  setup(props, { emit }) {
+    const subscriptions = [];
+
+    onMounted(async () => {
+      for (let i = 0; i < props.listen.length; i++) {
+        const name = props.listen[i];
+        const jsName = name.replaceAll("_", "-");
+        const eventName = `tauri://${jsName}`;
+        subscriptions.push(
+          await listen(eventName, (e) => {
+            emit(jsName, e.payload);
+          })
+        );
+      }
+      for (let i = 0; i < props.once.length; i++) {
+        const name = props.once[i];
+        const jsName = name.replaceAll("_", "-");
+        const eventName = `tauri://${jsName}`;
+        subscriptions.push(
+          await once(eventName, (e) => {
+            emit(jsName, e.payload);
+          })
+        );
+      }
+    });
+
+    onBeforeUnmount(() => {
+      while (subscriptions.length) {
+        subscriptions.pop()();
+      }
+    })
   },
 };

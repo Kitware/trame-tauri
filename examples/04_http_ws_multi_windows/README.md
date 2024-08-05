@@ -33,6 +33,7 @@ cargo tauri build
 ## Running application
 
 ### Linux and macOS
+
 ```bash
 # Start server
 python ./server.py &
@@ -42,6 +43,7 @@ open ./src-tauri/target/release/bundle/macos/MultiWindows.app
 ```
 
 ### Windows
+
 ```batch
 # Start server
 python .\server.py

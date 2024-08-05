@@ -23,8 +23,8 @@ class Events(HtmlElement):
             "tauri-events",
             **kwargs,
         )
-        self._event_names += listen
-        self._event_names += once
+        self._event_names += [(name, name.replace("_", "-")) for name in listen]
+        self._event_names += [(name, name.replace("_", "-")) for name in once]
         l_names = ",".join(map(lambda n: f"'{n}'", listen))
         o_names = ",".join(map(lambda n: f"'{n}'", once))
         self._attributes["__listen"] = f':listen="[{l_names}]"'

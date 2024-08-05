@@ -27,6 +27,14 @@ class TestApp:
 
     def build_ui_main(self):
         with SinglePageLayout(self.server, full_height=True) as layout:
+            tauri.Events(
+                listen=[
+                    "theme_changed",
+                    "resize",
+                ],
+                theme_changed=(print, "['theme', $event]"),
+                resize=(print, "['size', $event]"),
+            )
             with html.Div(v_if=("enable_windows", True)):
                 self.windows = tauri.Window(
                     v_for="window_item, i in window_list",
