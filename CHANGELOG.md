@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.6.1 (2024-08-05)
+
+### Fix
+
+* **events:** Properly map tauri event to Python ([`3ed95d9`](https://github.com/Kitware/trame-tauri/commit/3ed95d92d778e094c69a802c7be6c66e0491ea51))
+
 ## v0.6.0 (2024-05-29)
 
 ### Feature
