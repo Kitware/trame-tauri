@@ -61,6 +61,7 @@ export default {
     "resized",
     "scaleChanged",
     "themeChanged",
+    "noTauri",
   ],
   setup(props, { emit, expose }) {
     const position = ref([0, 0]);
@@ -100,88 +101,126 @@ export default {
     });
 
     // Event handling
-
-    if (props.main) {
-      webView.scaleFactor().then((scale) => {
-        scaleFactor.value = scale;
-        webView.outerPosition().then((p) => {
-          const l = p.toLogical(scale);
-          position.value = [l.x, l.y];
-        });
-        webView.outerSize().then((wh) => {
-          const l = wh.toLogical(scale);
-          size.value = [l.width, l.height];
-        });
-      });
-    } else {
-      webView.once("tauri://created", async () => {
-        scaleFactor.value = await webView.scaleFactor();
-        const op = (await webView.outerPosition()).toLogical(scaleFactor.value);
-        const os = (await webView.outerSize()).toLogical(scaleFactor.value);
-        position.value = [op.x, op.y];
-        size.value = [os.width, os.height];
-        emit("created", {
-          scaleFactor: scaleFactor.value,
-          position: position.value,
-          size: size.value,
-        });
-      });
+    let tauriAvailable = true;
+    function noTauri() {
+      if (tauriAvailable) {
+        emit("noTauri");
+      }
+      tauriAvailable = false;
     }
 
-    webView.once("tauri://error", function (e) {
-      console.error("Tauri window error");
-      console.error(e);
-    });
+    try {
+      if (props.main) {
+        webView
+          .scaleFactor()
+          .then((scale) => {
+            scaleFactor.value = scale;
+            webView.outerPosition().then((p) => {
+              const l = p.toLogical(scale);
+              position.value = [l.x, l.y];
+            });
+            webView.outerSize().then((wh) => {
+              const l = wh.toLogical(scale);
+              size.value = [l.width, l.height];
+            });
+          })
+          .catch(noTauri);
+      } else {
+        webView
+          .once("tauri://created", async () => {
+            scaleFactor.value = await webView.scaleFactor();
+            const op = (await webView.outerPosition()).toLogical(
+              scaleFactor.value
+            );
+            const os = (await webView.outerSize()).toLogical(scaleFactor.value);
+            position.value = [op.x, op.y];
+            size.value = [os.width, os.height];
+            emit("created", {
+              scaleFactor: scaleFactor.value,
+              position: position.value,
+              size: size.value,
+            });
+          })
+          .catch(noTauri);
+      }
 
-    subscriptions.push(
-      webView.onCloseRequested((event) => {
-        emit("closed");
-        if (props.preventClose) {
-          event.preventDefault();
-        }
-      })
-    );
-    subscriptions.push(
-      webView.onFileDropEvent(({ payload }) => {
-        emit("fileDrop", payload);
-      })
-    );
-    subscriptions.push(
-      webView.onFocusChanged(({ payload: focused }) => {
-        emit("focusChanged", focused);
-      })
-    );
-    subscriptions.push(
-      webView.onMenuClicked(({ payload: menuId }) => {
-        emit("menuClicked", menuId);
-      })
-    );
-    subscriptions.push(
-      webView.onMoved(async ({ payload }) => {
-        const logical = payload.toLogical(scaleFactor.value);
-        const data = [logical.x, logical.y];
-        position.value = data;
-        emit("moved", data);
-      })
-    );
-    subscriptions.push(
-      webView.onResized(({ payload }) => {
-        const logical = payload.toLogical(scaleFactor.value);
-        size.value = [logical.width, logical.height];
-        emit("resized", size.value);
-      })
-    );
-    subscriptions.push(
-      webView.onScaleChanged(({ payload }) => {
-        scaleFactor.value = payload.scaleFactor;
-        emit("scaleChanged", payload.scaleFactor);
-      })
-    );
-    subscriptions.push(
-      webView.onThemeChanged(({ payload }) => {
-        emit("themeChanged", payload);
-      })
-    );
+      if (!tauriAvailable) {
+        return;
+      }
+
+      webView.once("tauri://error", function (e) {
+        console.error("Tauri window error");
+        console.error(e);
+      });
+
+      subscriptions.push(
+        webView
+          .onCloseRequested((event) => {
+            emit("closed");
+            if (props.preventClose) {
+              event.preventDefault();
+            }
+          })
+          .catch(noTauri)
+      );
+      subscriptions.push(
+        webView
+          .onFileDropEvent(({ payload }) => {
+            emit("fileDrop", payload);
+          })
+          .catch(noTauri)
+      );
+      subscriptions.push(
+        webView
+          .onFocusChanged(({ payload: focused }) => {
+            emit("focusChanged", focused);
+          })
+          .catch(noTauri)
+      );
+      subscriptions.push(
+        webView
+          .onMenuClicked(({ payload: menuId }) => {
+            emit("menuClicked", menuId);
+          })
+          .catch(noTauri)
+      );
+      subscriptions.push(
+        webView
+          .onMoved(async ({ payload }) => {
+            const logical = payload.toLogical(scaleFactor.value);
+            const data = [logical.x, logical.y];
+            position.value = data;
+            emit("moved", data);
+          })
+          .catch(noTauri)
+      );
+      subscriptions.push(
+        webView
+          .onResized(({ payload }) => {
+            const logical = payload.toLogical(scaleFactor.value);
+            size.value = [logical.width, logical.height];
+            emit("resized", size.value);
+          })
+          .catch(noTauri)
+      );
+      subscriptions.push(
+        webView
+          .onScaleChanged(({ payload }) => {
+            scaleFactor.value = payload.scaleFactor;
+            emit("scaleChanged", payload.scaleFactor);
+          })
+          .catch(noTauri)
+      );
+      subscriptions.push(
+        webView
+          .onThemeChanged(({ payload }) => {
+            emit("themeChanged", payload);
+          })
+          .catch(noTauri)
+      );
+    } catch (e) {
+      noTauri();
+    }
 
     // Reactive props
 

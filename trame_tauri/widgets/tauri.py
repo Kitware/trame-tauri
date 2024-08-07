@@ -23,6 +23,7 @@ class Events(HtmlElement):
             "tauri-events",
             **kwargs,
         )
+        self._event_names += [("no_tauri", "noTauri")]
         self._event_names += [(name, name.replace("_", "-")) for name in listen]
         self._event_names += [(name, name.replace("_", "-")) for name in once]
         l_names = ",".join(map(lambda n: f"'{n}'", listen))
@@ -169,6 +170,7 @@ class Window(HtmlElement):
             ("prevent_close", "preventClose"),
         ]
         self._event_names += [
+            ("no_tauri", "noTauri"),
             "created",
             "closed",
             ("file_drop", "fileDrop"),

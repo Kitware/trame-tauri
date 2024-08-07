@@ -34,6 +34,7 @@ class TestApp:
                 ],
                 theme_changed=(print, "['theme', $event]"),
                 resize=(print, "['size', $event]"),
+                no_tauri=(print, "['Tauri is not available']"),
             )
             with html.Div(v_if=("enable_windows", True)):
                 self.windows = tauri.Window(
