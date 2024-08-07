@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.6.2 (2024-08-07)
+
+### Fix
+
+* **tauri:** Not running in tauri will not through error ([`bf2bd04`](https://github.com/Kitware/trame-tauri/commit/bf2bd0463d7a79bedb716ebcb81a5b4e06151444))
+
 ## v0.6.1 (2024-08-05)
 
 ### Fix
