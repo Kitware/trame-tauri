@@ -1,5 +1,7 @@
+.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-tauri
+
 =======================================================
-trame-tauri
+trame-tauri |pypi_download|
 =======================================================
 
 Widgets/utils library to help with Tauri integration in trame.
