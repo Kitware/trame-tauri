@@ -40,7 +40,7 @@ This license has been chosen to match the one use by `Tauri <https://github.com/
 Community
 -----------------------------------------------------------
 
-`Trame <https://kitware.github.io/trame/>`_ | `Discussions <https://github.com/Kitware/trame/discussions>`_ | `Issues <https://github.com/Kitware/trame/issues>`_ | `RoadMap <https://github.com/Kitware/trame/projects/1>`_ | `Contact Us <https://www.kitware.com/contact-us/>`_
+`Trame <https://kitware.github.io/trame/>`_ | `Discussions <https://github.com/Kitware/trame/discussions>`_ | `Issues <https://github.com/Kitware/trame/issues>`_ | `Contact Us <https://www.kitware.com/contact-us/>`_
 
 .. image:: https://zenodo.org/badge/410108340.svg
     :target: https://zenodo.org/badge/latestdoi/410108340
