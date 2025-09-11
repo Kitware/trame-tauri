@@ -11,4 +11,5 @@ export default {
       ask: async (kwargs) => emit("ask", await ask(kwargs)),
     });
   },
+  template: `<slot />`,
 };
