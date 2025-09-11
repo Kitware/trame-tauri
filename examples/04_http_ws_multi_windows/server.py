@@ -33,7 +33,11 @@ class TestApp:
                             appWindow.onMoved(async ({ payload }) => {
                                 const size = await appWindow.outerSize();
                                 hello_window = trame.utils.tauri.window.WebviewWindow.getByLabel('hello_world');
-                                await hello_window.setPosition(new LogicalPosition((payload.x + size.width) / scaleFactor, payload.y / scaleFactor));
+                                await hello_window.setPosition(
+                                    new LogicalPosition(
+                                        (payload.x + size.width) / scaleFactor, payload.y / scaleFactor
+                                    )
+                                );
                             });
 
                             const hello_world = new trame.utils.tauri.window.WebviewWindow('hello_world', {

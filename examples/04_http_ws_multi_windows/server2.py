@@ -111,42 +111,46 @@ class TestApp:
                 html.Div("p({{ position }}) - s({{ size }}) - d({{ scale }})")
                 v3.VDivider(style="margin: 8px;")
                 with html.Div(v_if=("window_hello_world", False)):
-                    with tauri.Window(
-                        url="http://localhost:4444/index.html?ui=hello_world",
-                        visible=("window_hello_world", False),
-                        title=("child_title", "Hello"),
-                        x=("pos_x", 100),
-                        y=("pos_y", 100),
-                        width=("size_w", 300),
-                        height=("size_h", 300),
-                        options=(
-                            "child_options",
-                            {
-                                # "alwaysOnTop": True,
-                                # "center": True,
-                                # "closable": False,
-                                # "decorations": False,
-                                "focus": False,  # Does not work
-                                "minHeight": 200,
-                                "minWidth": 200,
-                                "maxHeight": 800,
-                                "maxWidth": 800,
-                                # "maximizable": False,  # You need `"decoration": True` to see this (button will be disabled)
-                                # "minimizable": False,  # You need `"decoration": True` to see this (button will be disabled)
-                                # "skipTaskbar": True,  # Does not work
-                                "theme": "light",
-                                "fileDropEnabled": False,
-                            },
-                        ),
-                        prevent_close=True,  # Will not work using Tauri v1: https://github.com/tauri-apps/tauri/issues/8435
-                        moved="position = $event",
-                        resized="size = $event",
-                        scale_changed="scale = $event",
-                        created="{ position, size, scaleFactor: scale } = $event",
-                        closed="window_hello_world = false; window.console.log('evt closed')",
-                        file_drop="window.console.log('file:', $event)",
-                        theme_changed="window.console.log('theme:', $event)",
-                    ) as w:
+                    with (
+                        tauri.Window(
+                            url="http://localhost:4444/index.html?ui=hello_world",
+                            visible=("window_hello_world", False),
+                            title=("child_title", "Hello"),
+                            x=("pos_x", 100),
+                            y=("pos_y", 100),
+                            width=("size_w", 300),
+                            height=("size_h", 300),
+                            options=(
+                                "child_options",
+                                {
+                                    # "alwaysOnTop": True,
+                                    # "center": True,
+                                    # "closable": False,
+                                    # "decorations": False,
+                                    "focus": False,  # Does not work
+                                    "minHeight": 200,
+                                    "minWidth": 200,
+                                    "maxHeight": 800,
+                                    "maxWidth": 800,
+                                    # You need `"decoration": True` to see this (button will be disabled)
+                                    # "maximizable": False,
+                                    # "minimizable": False,
+                                    # Does not work
+                                    # "skipTaskbar": True,
+                                    "theme": "light",
+                                    "fileDropEnabled": False,
+                                },
+                            ),
+                            prevent_close=True,  # Will not work using Tauri v1: https://github.com/tauri-apps/tauri/issues/8435
+                            moved="position = $event",
+                            resized="size = $event",
+                            scale_changed="scale = $event",
+                            created="{ position, size, scaleFactor: scale } = $event",
+                            closed="window_hello_world = false; window.console.log('evt closed')",
+                            file_drop="window.console.log('file:', $event)",
+                            theme_changed="window.console.log('theme:', $event)",
+                        ) as w
+                    ):
                         self.server.controller.trigger_name(w.request_user_attention)
                         with v3.Template(raw_attrs=['v-slot="data"']):
                             v3.VTextField(v_model="child_title")

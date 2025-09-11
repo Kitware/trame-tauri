@@ -15,7 +15,7 @@ export default {
         },
       },
     },
-    outDir: "../trame_tauri/module/serve",
+    outDir: "../src/trame_tauri/module/serve",
     assetsDir: ".",
   },
 };
