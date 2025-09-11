@@ -1,6 +1,6 @@
 [project]
 name = "trame-tauri"
-version = "1.0.1"
+version = "1.0.2"
 description = "Helper widget to provide simpler integration with Tauri"
 authors = [
     {name = "Kitware Inc."},
