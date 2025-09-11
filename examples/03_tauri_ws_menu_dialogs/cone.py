@@ -121,7 +121,14 @@ class Cone:
                             )
                     vuetify.VTextarea(
                         v_model=("logs", ""),
-                        style="position: absolute; z-index: 1; bottom: 10px; left: 10px; width: 50vw; background: #fff;",
+                        style=(
+                            "position: absolute;"
+                            "z-index: 1;"
+                            "bottom: 10px;"
+                            "left: 10px;"
+                            "width: 50vw;"
+                            "background: #fff;"
+                        ),
                     )
 
             with layout.toolbar:

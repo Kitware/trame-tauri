@@ -1,4 +1,4 @@
-from trame_tauri.widgets.tauri import *
+from trame_tauri.widgets.tauri import *  # noqa: F403
 
 
 def initialize(server):
