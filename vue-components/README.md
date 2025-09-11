@@ -1,6 +1,6 @@
 # Custom Vue module
 
-This sub-directory capture the client side components that you want to expose inside your trame application.
+This sub-directory captures the client side components that you want to expose inside your trame application.
 
 ## Build
 
