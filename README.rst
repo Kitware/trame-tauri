@@ -1,4 +1,4 @@
-.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-tauri
+.. |pypi_download| image:: https://kitware.github.io/trame/downloads/trame-tauri.svg
 
 =======================================================
 trame-tauri |pypi_download|
