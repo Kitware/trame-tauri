@@ -55,4 +55,4 @@ Share your experience `with a testimonial <https://github.com/Kitware/trame/issu
 JavaScript dependency
 -----------------------------------------------------------
 
-This Python package bundle the ``@tauri-apps/api@1.5.3`` javascript libraries. If you would like us to upgrade it, `please reach out <https://www.kitware.com/trame/>`_.
+This Python package bundle the ``@tauri-apps/api@2.12.4`` javascript libraries. If you would like us to upgrade it, `please reach out <https://www.kitware.com/trame/>`_.

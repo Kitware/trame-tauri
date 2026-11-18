@@ -1,3 +1,3 @@
-import * as all from "@tauri-apps/api/updater";
+import * as all from "@tauri-apps/plugin-updater";
 
 export default { ...all };

@@ -1,13 +1,20 @@
+import { isTauri } from "@tauri-apps/api/core";
+import { LogicalPosition, LogicalSize } from "@tauri-apps/api/window";
 import {
-  LogicalPosition,
-  LogicalSize,
   WebviewWindow,
-  appWindow,
-} from "@tauri-apps/api/window";
+  getCurrentWebviewWindow,
+} from "@tauri-apps/api/webviewWindow";
 import { ref, onBeforeUnmount, watch } from "vue";
 
 const OPTIONAL_PROPS = ["x", "y", "width", "height"];
 let LABEL_COUNT = 1;
+
+function getMainWindow() {
+  if (isTauri()) {
+    return getCurrentWebviewWindow();
+  }
+  return new WebviewWindow("main", { skip: true });
+}
 
 export default {
   props: {
@@ -83,7 +90,7 @@ export default {
       }
     }
     const webView = props.main
-      ? appWindow
+      ? getMainWindow()
       : new WebviewWindow(window_id, initialSettings);
     const subscriptions = [];
 
@@ -165,8 +172,11 @@ export default {
       );
       subscriptions.push(
         webView
-          .onFileDropEvent(({ payload }) => {
-            emit("fileDrop", payload);
+          .onDragDropEvent(({ payload }) => {
+            // Skip "over" which only carries the cursor position on every move
+            if (payload.type !== "over") {
+              emit("fileDrop", payload);
+            }
           })
           .catch(noTauri)
       );
@@ -179,7 +189,8 @@ export default {
       );
       subscriptions.push(
         webView
-          .onMenuClicked(({ payload: menuId }) => {
+          // Not built into Tauri v2, the application needs to emit it on menu events
+          .listen("tauri://menu", ({ payload: menuId }) => {
             emit("menuClicked", menuId);
           })
           .catch(noTauri)

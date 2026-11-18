@@ -1,3 +1,3 @@
-import * as all from "@tauri-apps/api/clipboard";
+import * as all from "@tauri-apps/plugin-clipboard-manager";
 
 export default { ...all };

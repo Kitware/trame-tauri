@@ -1,3 +1,3 @@
-import * as all from "@tauri-apps/api/fs";
+import * as all from "@tauri-apps/plugin-fs";
 
 export default { ...all };
