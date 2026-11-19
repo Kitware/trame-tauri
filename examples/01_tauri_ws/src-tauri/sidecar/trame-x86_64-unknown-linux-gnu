@@ -1,5 +1,5 @@
 #!/bin/bash
 rootdir=`dirname $0`
-rootdir=`cd $rootdir && cd ../lib/cone && pwd`
+rootdir=`cd $rootdir && cd ../lib/Cone && pwd`
 
 $rootdir/server/server $@

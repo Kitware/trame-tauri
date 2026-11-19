@@ -5,3 +5,4 @@ icons
 server
 Cargo.lock
 www
+/gen/schemas

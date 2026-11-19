@@ -3,7 +3,7 @@
 Install Rust + Tauri
 
 ```sh
-cargo install tauri-cli
+cargo install tauri-cli --version "^2.0.0" --locked
 cargo tauri init
 ```
 
@@ -33,9 +33,8 @@ aarch64-apple-darwin
 ## Refs
 
 - Sidecar
-    - https://tauri.app/v1/guides/building/sidecar/
-    - https://github.com/tauri-apps/tauri/tree/next/examples/sidecar
-    - https://tauri.app/v1/guides/building/sidecar/#running-on-rust
+    - https://v2.tauri.app/develop/sidecar/
+    - https://v2.tauri.app/develop/sidecar/#running-it-from-rust
     - (Express) https://github.com/tauri-apps/tauri/discussions/5336
     - (Python) https://github.com/tauri-apps/tauri/discussions/2759
     - (example repo) https://github.com/cherob/tauri-rust-py
