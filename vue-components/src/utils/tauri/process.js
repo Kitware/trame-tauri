@@ -1,3 +1,3 @@
-import * as all from "@tauri-apps/api/process";
+import * as all from "@tauri-apps/plugin-process";
 
 export default { ...all };

@@ -1,65 +1,29 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
   "build": {
-    "beforeBuildCommand": "",
-    "beforeDevCommand": "",
-    "devPath": "./www",
-    "distDir": "./www"
+    "frontendDist": "./www"
   },
-  "package": {
-    "productName": "Cone",
-    "version": "0.1.0"
+  "productName": "Cone",
+  "mainBinaryName": "Cone",
+  "version": "0.1.0",
+  "identifier": "trame.cone",
+  "bundle": {
+    "active": true,
+    "category": "DeveloperTool",
+    "externalBin": ["sidecar/trame"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": ["server"],
+    "targets": ["appimage", "nsis", "msi", "app", "dmg"]
   },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "sidecar": true,
-        "scope": [
-          {
-            "name": "sidecar/trame",
-            "sidecar": true
-          }
-        ]
-      }
-    },
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": ["sidecar/trame"],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "trame.cone",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": ["server"],
-      "shortDescription": "",
-      "targets": ["appimage", "nsis", "msi", "app", "dmg"],
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
-      }
-    },
+  "app": {
     "security": {
       "csp": "default-src 'self' 'unsafe-inline' ws: localhost; script-src 'unsafe-eval' 'self';"
-    },
-    "updater": {
-      "active": false
     },
     "windows": [
       {

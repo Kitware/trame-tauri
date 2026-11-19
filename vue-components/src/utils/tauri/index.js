@@ -13,6 +13,7 @@ import process from "./process";
 import shell from "./shell";
 import tauri from "./tauri";
 import updater from "./updater";
+import webviewWindow from "./webviewWindow";
 import window from "./window";
 
 export default {
@@ -31,5 +32,6 @@ export default {
   shell,
   tauri,
   updater,
+  webviewWindow,
   window,
 };

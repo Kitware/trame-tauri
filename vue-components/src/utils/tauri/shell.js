@@ -1,3 +1,3 @@
-import * as all from "@tauri-apps/api/shell";
+import * as all from "@tauri-apps/plugin-shell";
 
 export default { ...all };

@@ -3,18 +3,19 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::api::process::{Command, CommandEvent};
 use tauri::Manager;
+use tauri_plugin_shell::{process::CommandEvent, ShellExt};
 use std::time::Duration;
 use async_std::task;
 
 fn main() {
   tauri::Builder::default()
+    .plugin(tauri_plugin_shell::init())
     .setup(|app| {
-      let splashscreen_window = app.get_window("splashscreen").unwrap();
-      let main_window = app.get_window("main").unwrap();
+      let splashscreen_window = app.get_webview_window("splashscreen").unwrap();
+      let main_window = app.get_webview_window("main").unwrap();
 
-      let (mut rx, _) = Command::new_sidecar("trame")
+      let (mut rx, _) = app.shell().sidecar("trame")
         .expect("failed to create sidecar")
         .args(["--server", "--port", "0", "--timeout", "1", "--no-http"])
         .spawn()
@@ -24,6 +25,7 @@ fn main() {
         while let Some(event) = rx.recv().await {
           match event {
             CommandEvent::Stdout(line) => {
+              let line = String::from_utf8_lossy(&line);
               if line.contains("tauri-server-port=") {
                 let tokens: Vec<&str> = line.split("=").collect();
                 let port_token = tokens[1].to_string();
@@ -34,11 +36,12 @@ fn main() {
               if line.contains("tauri-client-ready") {
                 task::sleep(Duration::from_secs(2)).await;
                 splashscreen_window.close().unwrap();
+                main_window.show().unwrap();
               }
             },
             CommandEvent::Stderr(line) => {
               // Handle stderr output
-              println!("Stderr: {}", line);
+              println!("Stderr: {}", String::from_utf8_lossy(&line));
             },
             _ => {},
           }

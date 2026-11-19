@@ -79,7 +79,7 @@ class Dialog(HtmlElement):
         if title:
             options["title"] = title
         if type:
-            options["type"] = type
+            options["kind"] = type
 
         self.server.js_call(self._ref, "ask", message, options)
         return await self._ask_queue.get()
@@ -89,7 +89,7 @@ class Dialog(HtmlElement):
         if title:
             options["title"] = title
         if type:
-            options["type"] = type
+            options["kind"] = type
 
         self.server.js_call(self._ref, "confirm", message, options)
         return await self._confirm_queue.get()
@@ -99,7 +99,7 @@ class Dialog(HtmlElement):
         if title:
             options["title"] = title
         if type:
-            options["type"] = type
+            options["kind"] = type
 
         self.server.js_call(self._ref, "message", message, options)
         return await self._message_queue.get()
@@ -255,7 +255,7 @@ class Window(HtmlElement):
 
     def request_user_attention(self, level=None):
         """Request user attention. Level can be None/1/2.
-        https://tauri.app/v1/api/js/window#userattentiontype"""
+        https://v2.tauri.app/reference/javascript/api/namespacewindow/#userattentiontype"""
         if level is None:
             self.server.js_call(
                 self.__ref,

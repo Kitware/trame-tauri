@@ -3,33 +3,20 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::api::process::{Command, CommandEvent};
-use tauri::{CustomMenuItem, Menu, Submenu};
-use tauri::Manager;
+use tauri::menu::{MenuBuilder, SubmenuBuilder};
+use tauri::{Emitter, Manager};
+use tauri_plugin_shell::{process::CommandEvent, ShellExt};
 use std::time::Duration;
 use async_std::task;
 
 fn main() {
-  // Native Menu
-  let menu = Menu::new()
-    .add_submenu(Submenu::new(
-      "File",
-      Menu::new()
-        .add_item(CustomMenuItem::new("close".to_string(), "Close"))
-        .add_item(CustomMenuItem::new("quit".to_string(), "Quit"))
-    ))
-    .add_submenu(Submenu::new(
-      "View",
-      Menu::new()
-        .add_item(CustomMenuItem::new("reset_camera".to_string(), "Reset Camera"))
-    ));
-
   tauri::Builder::default()
+    .plugin(tauri_plugin_shell::init())
     .setup(|app| {
-      let splashscreen_window = app.get_window("splashscreen").unwrap();
-      let main_window = app.get_window("main").unwrap();
+      let splashscreen_window = app.get_webview_window("splashscreen").unwrap();
+      let main_window = app.get_webview_window("main").unwrap();
 
-      let (mut rx, _) = Command::new_sidecar("trame")
+      let (mut rx, _) = app.shell().sidecar("trame")
         .expect("failed to create sidecar")
         .args(["--server", "--port", "0", "--timeout", "1", "--no-http"])
         .spawn()
@@ -38,6 +25,7 @@ fn main() {
       tauri::async_runtime::spawn(async move {
         while let Some(event) = rx.recv().await {
           if let CommandEvent::Stdout(line) = event {
+            let line = String::from_utf8_lossy(&line);
             if line.contains("tauri-server-port=") {
               let tokens: Vec<&str> = line.split("=").collect();
               let port_token = tokens[1].to_string();
@@ -55,14 +43,29 @@ fn main() {
       });
       Ok(())
     })
-    .menu(menu) // Add menu to UI
-    .on_menu_event(|event| {
-      match event.menu_item_id() {
+    .menu(|handle| {
+      // Native Menu
+      let file_menu = SubmenuBuilder::new(handle, "File")
+        .text("close", "Close")
+        .text("quit", "Quit")
+        .build()?;
+      let view_menu = SubmenuBuilder::new(handle, "View")
+        .text("reset_camera", "Reset Camera")
+        .build()?;
+      MenuBuilder::new(handle)
+        .item(&file_menu)
+        .item(&view_menu)
+        .build()
+    })
+    .on_menu_event(|app, event| {
+      // Forward menu clicks to trame: tauri.Events(listen=["menu"]) in cone.py
+      let _ = app.emit("tauri://menu", event.id().as_ref());
+      match event.id().as_ref() {
         "quit" => {
-          std::process::exit(0);
+          app.exit(0);
         }
         "close" => {
-          event.window().close().unwrap();
+          app.get_webview_window("main").unwrap().close().unwrap();
         }
         _ => {}
       }
